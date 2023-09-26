@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ksolves Team
+ * @copyright Copyright (c) 2019 Ksolves (https://www.ksolves.com)
+ * @package Ksolves_FAQ
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+	<referenceBlock name="header.links">
+    	<block class="Ksolves\FAQ\Block\Frontend\Links\Link" ifconfig="faq/general/enable" name="custom-header-link"/>
+    </referenceBlock>
+
+	<referenceBlock name="footer_links">
+		<block ifconfig="faq/general/enable"   class="Ksolves\FAQ\Block\Frontend\Links\FooterLink"  name="custom-link-2"></block>
+	</referenceBlock>
+
+</body>
+</page>

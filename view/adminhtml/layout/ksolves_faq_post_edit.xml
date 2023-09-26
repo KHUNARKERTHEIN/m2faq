@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Ksolves Team
+ * @copyright Copyright (c) 2019 Ksolves (https://www.ksolves.com)
+ * @package Ksolves_FAQ
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+
+    <update handle="styles"/>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="ksolves_faq_post_addnewfaq"/>
+        </referenceContainer>
+    </body>
+</page>

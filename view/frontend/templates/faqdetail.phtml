@@ -1,0 +1,205 @@
+<?php 
+
+$faqdetail = $block->getFaqDetail();
+$mediapath = $faqdetail['media'];
+$record = $faqdetail['record'];
+$votingrecord = $faqdetail['votingrecord'];
+
+$display_before_voting =  $this->helper(\Ksolves\FAQ\Helper\ConfigData::class)
+->getHelpfulnessConfigData('display_before_voting');
+
+$display_after_voting =  $this->helper(\Ksolves\FAQ\Helper\ConfigData::class)
+->getHelpfulnessConfigData('display_after_voting');
+
+if (!$block->getModuleStatus() || (!$block->allowTopLink() && !$block->allowFooterLink()) ) {
+  $block->getRedirect();
+}
+
+?>
+<div class="faqdetail-panel">
+  <div class="faqdetail-container">
+    <h3 ><?php echo $record["faq"]; ?></h3>
+    <hr/>
+    <div class="faq-content">
+      <p>
+        <?php echo $record["content"]; ?> 
+      </p> 
+    </div>
+    <?php if ($record["url"]) : ?>
+      <iframe height="150" width="300" src="<?php echo $record["url"]; ?>" name="page" allowfullscreen="allowfullscreen"></iframe>
+    <?php endif ?>
+
+    <?php if($record["image"]) : ?>
+      <img height="150" width="300" class="faq-image" src="<?php echo $mediapath.$record["image"]; ?>"/>
+    <?php endif ?>
+
+    <?php if(!count($votingrecord)) :?>
+      <div class="helpfulness" id="<?php echo $record["faq_id"]; ?>" >
+        <span class="hw_bold"> Was this helpful?</span>
+        <span class="buttons">
+          <span class="like"><a onclick="likedfaq(<?php echo $record["faq_id"]; ?>)" > Yes   </a></span>
+          <span class="dislike"><a  onclick="dislikedfaq(<?php echo $record["faq_id"]; ?>)">No</a></span>
+          <span class="helper">You said "Yes" </span>
+          <span class="unhelper">You said "No" </span>
+        </span>
+        <span class="msg" id="voting-message">   <?php echo '(' . $record['helpfulness_rate']  . '% of other  found it helpful )'; ?> 
+      </span>
+
+    </div>
+    <?php else : ?>
+      <div class="helpfulness" id='<?php echo $record["faq_id"] ?>'>
+        <span class="hw_old"> Was this helpful?</span>
+        <span class="helper_old"> You said 
+          <?php if ($votingrecord[0]['helpfulness']) :?> 
+
+            Yes
+            <?php  else : ?>
+              No
+            <?php endif ?>
+
+          </span>
+          <span class="msg_old" id="voting-message">   <?php echo '(' . $record['helpfulness_rate']  . '% of other  found it helpful )'; ?> 
+        </span>
+      </div>
+
+    <?php endif ?>
+    <span type="hidden" class="displaybeforevoting"> <?php echo $display_before_voting ?></span>
+    <span type="hidden" class="displayaftervoting"> <?php echo $display_after_voting ?></span>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  
+  function likedfaq(Id) {
+    require(['jquery', 'jquery/ui'], function($){
+      $(document).ready(function(){
+        $.ajax({
+          url:"<?php echo $block->getBaseUrl().'ksfaq/index/data'; ?>",
+          data:{id:Id, 'helpful':'yes'},
+          type:'POST',
+          showLoader: true,
+          success:function(response) {
+            console.log(response);
+            document.getElementById(Id).getElementsByClassName('helper')[0].style.display = "inline-block";
+            document.getElementById(Id).getElementsByClassName('like')[0].style.display = "none";
+            document.getElementById(Id).getElementsByClassName('dislike')[0].style.display = "none";
+            document.getElementById(Id).getElementsByClassName('buttons')[0].style.marginLeft = "10px";
+            document.getElementById(Id).getElementsByClassName('hw_bold')[0].style.fontWeight = '20';
+            displayAfter(Id);
+          }
+        });
+      });
+    });
+  }    
+
+  function dislikedfaq(Id){
+    require(['jquery', 'jquery/ui'], function($){
+      $(document).ready(function(){
+        $.ajax({
+          url:"<?php echo $block->getBaseUrl().'ksfaq/index/data'; ?>",
+          data:{id:Id, 'helpful':'No'},
+          type:'POST',
+          showLoader: true,
+          success:function(response) {
+            document.getElementById(Id).getElementsByClassName('like')[0].style.display = "none";
+            document.getElementById(Id).getElementsByClassName('unhelper')[0].style.display = "inline-block";
+            document.getElementById(Id).getElementsByClassName('dislike')[0].style.display = "none";
+            document.getElementById(Id).getElementsByClassName('buttons')[0].style.marginLeft = "10px";
+            document.getElementById(Id).getElementsByClassName('hw_bold')[0].style.fontWeight = '20';
+            displayAfter(Id);
+            console.log(response);
+          }
+        });
+      });
+    });
+  }
+
+  function displayBefore() {
+    display_before_voting = document.getElementsByClassName('displaybeforevoting')[0].innerText;
+    display_after_voting = document.getElementsByClassName('displayaftervoting')[0].innerText;
+    messageList = document.getElementsByClassName("msg");
+    vottedMessageList = document.getElementsByClassName("msg_old");
+    console.log('inside display before' + display_before_voting);
+    
+    for (i=0; i< messageList.length ; i++) {
+      console.log('inside loop');
+      if(display_before_voting ==  1) {
+        console.log('hello');
+        messageList[i].style.display = 'inline-block';
+      } else {
+        console.log('bye');
+        messageList[i].style.display = 'none';
+        
+      }
+      
+    }
+  }
+
+
+  function displayAfter(Id) {
+    display_after_voting = document.getElementsByClassName('displayaftervoting')[0].innerText;
+    messageList = document.getElementById(Id).getElementsByClassName("msg");
+    vottedMessageList = document.getElementById(Id).getElementsByClassName("msg_old");
+    console.log('inside display after' + display_after_voting);
+    
+    if(display_after_voting ==  1) {
+      console.log('hello after');
+      require(['jquery', 'jquery/ui'], function($){
+        $(document).ready(function(){
+          $.ajax({
+            url:"<?php echo $block->getBaseUrl().'ksfaq/index/data'; ?>",
+            data:{id:Id, 'displayAfter':'Yes'},
+            type:'POST',
+            showLoader: true,
+            success:function(response) {
+              if(messageList.length == 0) {
+                vottedMessageList[0].style.display = 'inline-block'
+                
+              } else {
+                messageList[0].innerHTML = response.data;
+                messageList[0].style.display = 'inline-block';
+                
+              }
+              
+            }
+          });
+        });
+      });
+    } else {
+      if(messageList.length == 0) {
+        vottedMessageList[0].style.display = 'none';
+      } else {
+       messageList[0].style.display = 'none';
+
+     }
+     
+     
+   }
+ }
+
+ function findfaq(Id) {
+  console.log(Id);
+  document.getElementById('searchFaq').value = '';
+  require(['jquery', 'jquery/ui'], function($){
+    $(document).ready(function(){
+      $.ajax({
+        url:"<?php echo $block->getBaseUrl().'ksfaq/index/data'; ?>",
+        data:{id:Id},
+        type:'POST',
+        showLoader: true,
+        success:function(response) {
+          $("#element").html(response.data);
+          displayBefore();
+        }
+      });
+    });
+  });
+}    
+
+window.onload = function() {
+ var id = document.getElementsByClassName('helpfulness')[0].id;
+ displayBefore();
+}
+
+</script>

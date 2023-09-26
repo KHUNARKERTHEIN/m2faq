@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ksolves Team
+ * @copyright Copyright (c) 2019 Ksolves (https://www.ksolves.com)
+ * @package Ksolves_FAQ
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+<head>
+  <css src="Ksolves_FAQ::css/acc.css" />
+  </head>
+<body>
+    <referenceContainer name="content">
+      <block class="Ksolves\FAQ\Block\Index"  name="faq_display" template="Ksolves_FAQ::dashboard.phtml" cacheable="false" />
+    </referenceContainer>
+</body>
+</page>

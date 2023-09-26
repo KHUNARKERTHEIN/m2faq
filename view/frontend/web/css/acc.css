@@ -1,0 +1,229 @@
+#forbutton{
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background: #35b6b3;
+    box-sizing: border-box;
+    border-top: 2px solid #36a9a6;
+    flex-wrap: wrap;
+}
+
+.faqgroup{
+  width: 100px;
+  height: 110px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px;
+  cursor: pointer;
+  border: 1px solid #209693;
+  box-shadow: 3px 4px 2px rgba(0, 0, 0, 0.3) !important;
+  padding: 5px;
+  word-break: break-word;
+}
+
+.faqgroup:focus, 
+.faqgroup:hover,
+.active {
+  background-color: #ffffff;
+}
+ 
+#element{
+  /*background: #eeeeee;*/
+  padding: 3rem;
+}
+#element:empty{
+  display: none;
+}
+#element .accordion {
+  background-color: #fff;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  border: 1px solid #bfbfbf;
+  position: relative;
+  padding-left: 60px;
+  word-break: break-word;
+  padding-right: 40px;
+  
+}
+
+#element .accordion:hover {
+  background-color: #f3f3f3;
+}
+
+#element {
+  counter-reset: my-sec-counter;
+
+}
+
+#element form {
+  position: relative;
+  margin-bottom: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+#element form::before{ 
+  counter-increment: my-sec-counter;
+  content: counter(my-sec-counter) ". ";
+  position: absolute;
+  border-right: 1px solid #bfbfbf;
+  height: 100%;
+  top: 0px;
+  width: 50px;
+  text-align: center;
+  left: 0;
+  z-index: 1;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+#element form .accordion::after{
+  font-size: 16px;
+  line-height: 32px;
+  color: #757575;
+  content: '\e608';
+  font-family: 'luma-icons'; 
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+    
+
+.kspanel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+
+.like{
+  margin-right: 12px;
+  margin-left: 2px;
+  color:green;
+}
+
+.hw_bold{
+  font-weight: bold;
+}
+
+.helpfulness{
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-left: 5px solid #326f6b;
+  background: #35b6b3;
+  color: #fff;
+  margin: 10px 0;
+}
+.helpfulness a{
+  color: #326f6b;
+  cursor: pointer;
+}
+.msg{
+  margin-left: 4px;
+}
+
+.msg_old{
+  margin-left: 4px;
+}
+
+.subSearch {
+  background-color: #1979c3;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: 600;
+  padding: 7px 15px;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+  vertical-align: middle;
+  margin-top: 6px;
+}
+
+.helper {
+   display: none;
+}
+
+.helper_old {
+   margin-left: 10px;
+}
+
+.unhelper {
+  display: none;
+}
+
+.displaybeforevoting {
+  display: none;
+}
+
+.displayaftervoting {
+  display: none; 
+}
+
+.faq-image {
+  margin-left: 15px;
+}
+
+.searchBar{
+  width: 100%;
+  background-color: #35b6b3;
+  background-image: linear-gradient(90deg, #35b6b3 0%, #48c287 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.field-search{
+  display: block;
+  position: relative;  
+}
+
+.field-search .input-text{
+    height: 45px;
+}
+
+.btn-search{
+  position: absolute;
+  right: 0px;
+  height: 45px;
+}
+
+.btn-search::before{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 32px;
+  color: #757575;
+  content: '\e615';
+  font-family: 'luma-icons';
+  margin: 0;
+  vertical-align: top;
+  display: inline-block;
+  font-weight: normal;
+  overflow: hidden;
+  speak: none;
+  text-align: center;
+}
+
+
+.faqdetail-panel{}
+
+.faqdetail-container{
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem;
+  box-shadow: 0 0 4px #ccc;
+}
+.faqdetail-container h3{
+  margin-top: 0px;
+  word-break: break-word;
+}
+
+.faq-content p {
+  word-break: break-word;
+}

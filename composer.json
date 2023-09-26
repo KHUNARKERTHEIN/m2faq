@@ -1,0 +1,37 @@
+{
+  "name": "ksolves/magento-faq-extention",
+  "description": "FAQ extension allows to create a dedicated FAQ page, where all customer concerns are gathered in one place. The FAQs are displayed on one page with collapse/expand the feature.",
+  "keywords": [
+    "magento 2",
+    "faq extension"
+  ],
+
+  "config": {
+    "preferred-install": "dist",
+    "platform": {
+        "php": "~7.1.0||~7.2.0||~7.3.0"
+    }
+  },
+  "type": "magento2-module",
+  "version": "1.0.1",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Ksolves India Pvt. Ltd.",
+      "email": "magento@ksolves.com",
+      "homepage": "https://www.ksolves.com",
+      "role": "developer"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ksolves\\FAQ\\": ""
+    }
+  }
+}

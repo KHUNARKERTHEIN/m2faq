@@ -1,0 +1,97 @@
+<?php
+
+$model=$block->getCrete();
+$faqgroupcollection=$model->getCollection()->addFieldToFilter('status','1');
+$text         = $block->getText();
+$moduleStatus = $block->getModuleStatus();
+
+
+$display_before_voting =  $this->helper(\Ksolves\FAQ\Helper\ConfigData::class)
+->getHelpfulnessConfigData('display_before_voting');
+
+$display_after_voting =  $this->helper(\Ksolves\FAQ\Helper\ConfigData::class)
+->getHelpfulnessConfigData('display_after_voting');
+
+if (!$block->allowTopLink() && !$block->allowFooterLink()) {
+   $block->getRedirect();
+}
+
+if ($moduleStatus == 0) {
+    echo "Sorry your module is disable";
+}else
+{ 
+  ?>
+    <div class="searchBar" >
+      <div class="field-search"> 
+        <input type="text" id="searchFaq" class="input-text" name="searchFaq" placeholder="Search FAQ" />
+        <button class="btn-search" onclick="searchKeyword()"></button>
+      </div>
+    </div>
+    <div id ="forbutton"  >
+      <?php if(count($faqgroupcollection) > 0) {
+        foreach ($faqgroupcollection as $faqgroupdata) { ?>
+              <input type="hidden" name="faqgroup" id="<?php echo $faqgroupdata['faqgroup_id'];?>">
+              <button  class="faqgroup" id ="<?php echo 'faqgroup_id' .$faqgroupdata['faqgroup_id'];?>" name="button" onclick="findfaq(<?php echo $faqgroupdata['faqgroup_id'];?>)" ><?php echo $faqgroupdata['group_name']; ?></button>
+          </form>
+      <?php }}
+      else { ?>
+        <center><h1>NO, Group Found</h1></center>
+    <?php } ?>
+
+</div>
+<br>
+<hr>
+<div id = "element"></div>
+<span type="hidden" class="displaybeforevoting"> <?php echo $display_before_voting ?></span>
+<span type="hidden" class="displayaftervoting"> <?php echo $display_after_voting ?></span>
+
+<script>
+
+function findfaq(Id) {
+  document.getElementById('searchFaq').value = '';
+  if(document.getElementsByClassName('active').length>1)
+  document.getElementsByClassName('active')[1].classList.remove('active');
+  var butelement = document.getElementById('faqgroup_id' + Id);
+  butelement.classList.add('active');   
+  require(['jquery', 'jquery/ui'], function($){
+    $(document).ready(function(){
+      $.ajax({
+        url:"<?php echo $block->getBaseUrl().'ksfaq/index/data'; ?>",
+        data:{id:Id},
+        type:'POST',
+        showLoader: true,
+        success:function(response) {
+          $("#element").html(response.data);
+        }
+      });
+    });
+});
+}    
+
+function searchKeyword(keyword) {
+
+  var keyword = String(document.getElementById('searchFaq').value); 
+  if(keyword !=  ''){
+
+    require(['jquery', 'jquery/ui'], function($){
+      $(document).ready(function(){
+        $.ajax({
+          url:"<?php echo $block->getBaseUrl().'ksfaq/index/FaqSearch'; ?>",
+          data:{'keyword':keyword},
+          type:'POST',
+          showLoader: true,
+          success:function(response) {
+            $("#element").html(response.data);
+        }
+
+    });
+    });
+  });
+}
+
+}
+
+</script>
+
+
+<?php } ?>

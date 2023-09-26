@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <faq>
+            <general>
+                <enable>1</enable>
+                <display_text>FAQ</display_text>
+                <allow_toplink>1</allow_toplink>
+                <allow_footerlink>1</allow_footerlink>
+            </general>
+            <helpfulness_ratings>
+                <display_before_voting>0</display_before_voting>
+                <display_after_voting>0</display_after_voting>
+            </helpfulness_ratings>
+        </faq>
+    </default>
+</config>

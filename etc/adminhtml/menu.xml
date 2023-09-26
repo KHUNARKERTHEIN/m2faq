@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!--
+/**
+ * @author Ksolves Team
+ * @copyright Copyright (c) 2019 Ksolves (https://www.ksolves.com)
+ * @package Ksolves_FAQ
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+      <!--  FAQ Menu  -->
+       <add id="Ksolves_FAQ::faq" title="FAQ" module="Ksolves_FAQ" sortOrder="51" resource="Ksolves_FAQ::faq"/>
+       <!-- Sub Menu of FAQ Menu -->
+        <add id="Ksolves_FAQ::faqs" title="Add FAQ" module="Ksolves_FAQ" sortOrder="10" action="ksolves_faq/post/index" resource="Ksolves_FAQ::post" parent="Ksolves_FAQ::faq"/>
+
+        <add id="Ksolves_FAQ::faqgroups" title="FAQ Group" module="Ksolves_FAQ" sortOrder="99" parent="Ksolves_FAQ::faqs" action="ksolves_faq/Faqgroup/index" resource="Ksolves_FAQ::Faqgroup"/>
+
+        <add id="Ksolves_FAQ::faq_config" title="Configuration" translate="title" module="Ksolves_FAQ" parent="Ksolves_FAQ::faqgroups" sortOrder="10" dependsOnModule="Ksolves_FAQ" action="adminhtml/system_config/edit/section/faq" resource="Ksolves_FAQ::faq_config"/>
+        <!-- End -->
+    </menu>
+</config>

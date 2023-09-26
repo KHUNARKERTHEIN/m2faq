@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Ksolves Team
+ * @copyright Copyright (c) 2019 Ksolves (https://www.ksolves.com)
+ * @package Ksolves_FAQ
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+
+  <argument name="data" xsi:type="array">
+  		<item name="js_config" xsi:type="array">
+  			<item name="provider" xsi:type="string">ksolves_faq_post_addnewfaq.ksolves_faq_post_addnewfaq_data_source</item>
+  			<item name="deps" xsi:type="string">ksolves_faq_post_addnewfaq.ksolves_faq_post_addnewfaq_data_source</item>
+  		</item>
+  		<item name="label" translate="true" xsi:type="string">General Information</item>
+  		<item name="config" xsi:type="array">
+  			<item name="dataScope" xsi:type="string">data</item>
+  			<item name="namespace" xsi:type="string">ksolves_faq_post_addnewfaq</item>
+  		</item>
+  		<item name="template" xsi:type="string">templates/form/collapsible</item>
+  		<item name="buttons" xsi:type="array">
+  			<item name="back" xsi:type="string">Ksolves\FAQ\Block\Adminhtml\Faq\Edit\BackButton</item>
+        <item name="reset" xsi:type="string">Ksolves\FAQ\Block\Adminhtml\Faq\Edit\ResetButton</item>
+  			<item name="save" xsi:type="string">Ksolves\FAQ\Block\Adminhtml\Faq\Edit\SaveButton</item>
+  			<item name="save_and_continue" xsi:type="string">Ksolves\FAQ\Block\Adminhtml\Faq\Edit\SaveAndContinueButton</item>
+  		</item>
+  	</argument>
+  	<dataSource name="faqgroup_form_data_source">
+  		<argument name="dataProvider" xsi:type="configurableObject">
+  			<argument name="class" xsi:type="string">Ksolves\FAQ\Model\Faq\DataProvider</argument>
+  			<argument name="name" xsi:type="string">ksolves_faq_post_addnewfaq_data_source</argument>
+  			<argument name="primaryFieldName" xsi:type="string">faq_id</argument>
+  			<argument name="requestFieldName" xsi:type="string">faq_id</argument>
+  			<argument name="data" xsi:type="array">
+  				<item name="config" xsi:type="array">
+  					<item name="submit_url" path="*/*/save" xsi:type="url"/>
+  				</item>
+  			</argument>
+  		</argument>
+  		<argument name="data" xsi:type="array">
+  			<item name="js_config" xsi:type="array">
+  				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+  			</item>
+  		</argument>
+  	</dataSource>
+
+    <fieldset name="add_faq">
+      <argument name="data" xsi:type="array">
+          <item name="config" xsi:type="array">
+          <item name="label" xsi:type="string"/>
+          </item>
+      </argument>
+
+    <field name="faq">
+        <argument name="data" xsi:type="array">
+          <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">text</item>
+            <item name="label" translate="true" xsi:type="string">FAQ</item>
+            <item name="formElement" xsi:type="string">input</item>
+            <item name="source" xsi:type="string">FAQ</item>
+            <item name="sortOrder" xsi:type="number">20</item>
+            <item name="dataScope" xsi:type="string">faq</item>
+            <item name="validation" xsi:type="array">
+              <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+          </item>
+        </argument>
+      </field>
+
+       <field name="url_key">
+        <argument name="data" xsi:type="array">
+          <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">text</item>
+            <item name="label" translate="true" xsi:type="string">Url Key</item>
+            <item name="formElement" xsi:type="string">input</item>
+            <item name="source" xsi:type="string">FAQ</item>
+            <item name="sortOrder" xsi:type="number">25</item>
+            <item name="dataScope" xsi:type="string">url_key</item>
+            <item name="validation" xsi:type="array">
+              <item name="required-entry" xsi:type="boolean">true</item>
+              <item name="validate-identifier" xsi:type="boolean">true</item>
+            </item>
+          </item>
+        </argument>
+      </field>
+
+      <field name="content">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="formElement" xsi:type="string">textarea</item>
+                <item name="source" xsi:type="string">FAQ</item>
+                <item name="label" xsi:type="string">Content</item>
+                <item name="template" xsi:type="string">ui/form/field</item>
+                <item name="dataScope" xsi:type="string">content</item>
+                <item name="sortOrder" xsi:type="number">130</item>
+                <item name="cols" xsi:type="number">15</item>
+                <item name="rows" xsi:type="number">7</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                    <item name="max_text_length" xsi:type="number">300</item>
+                </item>
+            </item>
+        </argument>
+      </field>
+
+
+      <field name="image">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">string</item>
+                <item name="source" xsi:type="string">FAQ</item>
+                <item name="label" xsi:type="string" translate="true">Image</item>
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataScope" xsi:type="string">image</item>
+                <item name="formElement" xsi:type="string">fileUploader</item>
+                <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                <item name="required" xsi:type="boolean">false</item>
+                <item name="uploaderConfig" xsi:type="array">
+                    <item name="url" xsi:type="url" path="ksolves_faq/post/upload"/>
+                </item>
+            </item>
+        </argument>
+      </field>
+
+        <field name="url">
+            <argument name="data" xsi:type="array">
+              <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="label" translate="true" xsi:type="string">Youtube Embed Link</item>
+                 <item name="notice" xsi:type="string" translate="true"> Please write link in embed format.Example:(https://www.youtube.com/watch?v=tgbNymZ7vqY to https://www.youtube.com/embed/tgbNymZ7vqY )</item>
+                <item name="formElement" xsi:type="string">input</item>
+                <item name="source" xsi:type="string">FAQ</item>
+                <item name="sortOrder" xsi:type="number">140</item>
+                <item name="dataScope" xsi:type="string">url</item>
+                <item name="validation" xsi:type="array">
+                  <item name="validate-url" xsi:type="boolean">true</item>
+                </item>
+              </item>
+            </argument>
+          </field>
+
+        <field name="faqgroup_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ksolves\FAQ\Model\Source\Myvalues</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" translate="true" xsi:type="string">group Code</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="sort_order">
+        <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="label" xsi:type="string">Sort Order</item>
+            <item name="visible" xsi:type="boolean">true</item>
+            <item name="dataType" xsi:type="string">text</item>
+            <item name="disabled" xsi:type="boolean">false</item>
+            <item name="formElement" xsi:type="string">input</item>
+            <item name="source" xsi:type="string">FAQ</item>
+            <item name="dataScope" xsi:type="string">sort_order</item>
+            <item name="validation" xsi:type="array">
+                <item name="required-entry" xsi:type="boolean">true</item>
+                <item name="validate-number" xsi:type="boolean">true</item>
+                <item name="greater-than-equals-to" xsi:type="number">1</item>
+            </item>
+        </item>
+        </argument>
+        </field>
+
+        <field name="status">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Ksolves\FAQ\Ui\Component\Listing\Column\Status</item>
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Status</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">number</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">FAQ</item>
+                        <item name="dataScope" xsi:type="string">status</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+          </field>
+
+          <field name="meta_title">
+        <argument name="data" xsi:type="array">
+          <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">text</item>
+            <item name="label" translate="true" xsi:type="string">Meta Title</item>
+            <item name="formElement" xsi:type="string">input</item>
+            <item name="source" xsi:type="string">Meta Title</item>
+            <item name="sortOrder" xsi:type="number">25</item>
+            <item name="dataScope" xsi:type="string">meta_title</item>
+            <item name="validation" xsi:type="array">
+              <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+          </item>
+        </argument>
+      </field>
+
+    <field name="meta_description ">
+        <argument name="data" xsi:type="array">
+          <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">text</item>
+            <item name="label" translate="true" xsi:type="string">Meta Description</item>
+            <item name="formElement" xsi:type="string">input</item>
+            <item name="source" xsi:type="string">Meta Description</item>
+            <item name="sortOrder" xsi:type="number">30</item>
+            <item name="dataScope" xsi:type="string">meta_description</item>
+            <item name="validation" xsi:type="array">
+              <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+          </item>
+        </argument>
+      </field>
+
+    </fieldset>
+</form>
